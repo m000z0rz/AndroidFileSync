@@ -5,25 +5,48 @@ import java.io.IOException;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.net.InetAddress;
-
 import android.app.Activity;
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
+import android.content.ServiceConnection;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.util.Log;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.apache.commons.net.ftp.*;
+
+import com.absolutemaximumratings.androidfilesync.Synchronizer.SynchroBinder;
 
 
 //import org.apache.commons.net.ftp.FTPClient;
 
 public class AndroidFileSync extends Activity {
+	Synchronizer synchro;
+	boolean synchroBound = false;
+	
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Context context = getApplicationContext();
         
+        LinearLayout layout = new LinearLayout(context);
+        TextView headerText = new TextView(context);
+        headerText.append("hellos!\nmeow");
+        layout.addView(headerText);
+        Button btSynchronize = new Button(context);
+        btSynchronize.setText("Begin Synchronize");
+        btSynchronize.setOnClickListener(btSynchronize_Click);
+        setContentView(layout);
+        
+        /*
         Context context = getApplicationContext();
         TextView view = new TextView(context);
         view.setText("hellos");
@@ -100,6 +123,53 @@ public class AndroidFileSync extends Activity {
         }
 
         Log.i("filesync", "androidfilesync done");
-
+        */
     }
+    
+    private OnClickListener btSynchronize_Click = new OnClickListener() {
+        public void onClick(View v) {
+        	Context context = getApplicationContext();
+            if (synchroBound) {
+            	Log.i("filesync", "activity calling synchro");
+            	
+            	Toast.makeText(context, "calling in synchronizer", Toast.LENGTH_SHORT).show();
+            	synchro.startSynchronize();
+            } else {
+            	Log.e("filesync", "not bound");
+            	Toast.makeText(context, "no synchronizer bound", Toast.LENGTH_SHORT).show();
+            }
+        }
+    };
+
+    
+    @Override
+    protected void onStart() {
+    	super.onStart();
+    	// Bind the synchronizer service
+    	Intent intent = new Intent(this, Synchronizer.class);
+    	bindService(intent, synchroConnection, Context.BIND_AUTO_CREATE);
+    }
+    
+    @Override
+    protected void onStop() {
+    	super.onStop();
+    	// Unbind the synchro service
+    	if (synchroBound) {
+    		unbindService(synchroConnection);
+    		synchroBound = false;
+    	}
+    }
+    
+    private ServiceConnection synchroConnection = new ServiceConnection() {
+    	
+    	public void onServiceConnected(ComponentName className, IBinder serviceBinder) {
+    		SynchroBinder synchroBinder = (SynchroBinder) serviceBinder;
+    		synchro = synchroBinder.getService();
+    		synchroBound = true;	
+		}
+
+		public void onServiceDisconnected(ComponentName name) {
+			synchroBound = false;
+		}
+    };
 }

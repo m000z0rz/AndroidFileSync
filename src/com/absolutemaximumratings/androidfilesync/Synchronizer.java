@@ -1,9 +1,8 @@
 package com.absolutemaximumratings.androidfilesync;
 
-
 import android.app.Service;
-import android.content.Context;
 import android.content.Intent;
+import android.os.Binder;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.IBinder;
@@ -17,6 +16,14 @@ import android.widget.Toast;
 public class Synchronizer extends Service {
 	private Looper _threadLooper;
 	private ThreadHandler _threadHandler;
+	private final IBinder _binder = new SynchroBinder();
+	
+	public class SynchroBinder extends Binder {
+		Synchronizer getService() {
+			return Synchronizer.this;
+		}
+		
+	}
 
 	private final class ThreadHandler extends Handler {
 		public ThreadHandler(Looper looper) {
@@ -33,12 +40,15 @@ public class Synchronizer extends Service {
 	
 	@Override
 	public void onCreate() {
+		startSynchronize();
+	}
+	
+	public void startSynchronize() {
 		HandlerThread thread = new HandlerThread("DoesThisNameReallyMatter", Process.THREAD_PRIORITY_BACKGROUND);
 		thread.start();
 		
 		_threadLooper = thread.getLooper();
 		_threadHandler = new ThreadHandler(_threadLooper);
-		//super.onCreate();
 	}
 
 	@Override
@@ -56,7 +66,7 @@ public class Synchronizer extends Service {
 
 	@Override
 	public IBinder onBind(Intent arg0) {
-		return null;
+		return _binder;
 	}
 	
 	
