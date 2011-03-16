@@ -1,15 +1,11 @@
 package com.absolutemaximumratings.androidfilesync;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.FileInputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
-import android.app.Activity;
+import android.app.TabActivity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
@@ -17,36 +13,70 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import org.apache.commons.net.ftp.*;
 
 import com.absolutemaximumratings.androidfilesync.Synchronizer.SynchroBinder;
 
 
 //import org.apache.commons.net.ftp.FTPClient;
 
-public class AndroidFileSync extends Activity {
-	Synchronizer synchro;
-	boolean synchroBound = false;
+public class AndroidFileSync extends TabActivity {
+	public Synchronizer synchro;
+	public boolean synchroBound = false;
 	
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.main);
+        
+        Resources res = getResources();
+        TabHost tabHost = getTabHost();
+        TabHost.TabSpec spec;
+        Intent intent;
+        
+        intent = new Intent().setClass(this, OverviewActivity.class);
+        
+        spec = tabHost.newTabSpec("overview").setIndicator("Overview",
+        		res.getDrawable(R.drawable.ic_tab_overview))
+        		.setContent(intent);
+        tabHost.addTab(spec);
+        
+        intent = new Intent().setClass(this, ServersActivity.class);
+        spec = tabHost.newTabSpec("servers").setIndicator("Servers",
+        		res.getDrawable(R.drawable.ic_tab_servers))
+        		.setContent(intent);
+        tabHost.addTab(spec);
+        
+        intent = new Intent().setClass(this, FoldersActivity.class);
+        spec = tabHost.newTabSpec("folders").setIndicator("Folders",
+        		res.getDrawable(R.drawable.ic_tab_folders))
+        		.setContent(intent);
+        tabHost.addTab(spec);
+        
+        tabHost.setCurrentTab(0);
+        
+        
+        /*
+        
         Context context = getApplicationContext();
         
         LinearLayout layout = new LinearLayout(context);
+        layout.setOrientation(LinearLayout.VERTICAL);
         TextView headerText = new TextView(context);
         headerText.append("hellos!\nmeow");
         layout.addView(headerText);
+        
         Button btSynchronize = new Button(context);
         btSynchronize.setText("Begin Synchronize");
         btSynchronize.setOnClickListener(btSynchronize_Click);
+        layout.addView(btSynchronize);
+        
         setContentView(layout);
         
-        /*
+        
         Context context = getApplicationContext();
         TextView view = new TextView(context);
         view.setText("hellos");
@@ -145,19 +175,23 @@ public class AndroidFileSync extends Activity {
     @Override
     protected void onStart() {
     	super.onStart();
-    	// Bind the synchronizer service
+    	// Bind the synchronizer service   	
+    	
     	Intent intent = new Intent(this, Synchronizer.class);
-    	bindService(intent, synchroConnection, Context.BIND_AUTO_CREATE);
+    	Log.i("filesync", "filesync onstart");
+    	//bindService(intent, synchroConnection, Context.BIND_AUTO_CREATE);
     }
     
     @Override
     protected void onStop() {
     	super.onStop();
     	// Unbind the synchro service
+    	/*
     	if (synchroBound) {
     		unbindService(synchroConnection);
     		synchroBound = false;
     	}
+    	*/
     }
     
     private ServiceConnection synchroConnection = new ServiceConnection() {

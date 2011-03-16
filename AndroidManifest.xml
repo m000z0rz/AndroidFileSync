@@ -9,7 +9,8 @@
 
     <application android:icon="@drawable/icon" android:label="@string/app_name" android:debuggable="true">
         <activity android:name=".AndroidFileSync"
-                  android:label="@string/app_name">
+                  android:label="@string/app_name"
+                  android:theme="@android:style/Theme.NoTitleBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -21,6 +22,9 @@
             </intent-filter>
         </receiver>
         <service android:label="@string/app_name" android:name=".Synchronizer"></service>
+        <activity android:name=".OverviewActivity"></activity>
+        <activity android:name=".ServersActivity"></activity>
+        <activity android:name=".FoldersActivity"></activity>
 
     </application>
 </manifest>
