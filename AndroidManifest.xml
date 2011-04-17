@@ -25,6 +25,8 @@
         <activity android:name=".OverviewActivity"></activity>
         <activity android:name=".ServersActivity"></activity>
         <activity android:name=".FoldersActivity"></activity>
+        <activity android:name=".ServerEditActivity"></activity>
+        <activity android:name=".FolderEditActivity"></activity>
 
     </application>
 </manifest>

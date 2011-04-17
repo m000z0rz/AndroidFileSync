@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:padding="5dp">
+        <TextView
+        	style="@android:style/TextAppearance.Small"
+        	android:text="SSID"
+        	/>
+        <EditText
+        	android:id="@+id/server_ssid"
+        	style="@android:style/TextAppearance.Large"
+        	android:singleLine="true"
+        	android:layout_width="fill_parent"
+        	android:layout_height="wrap_content"
+        	android:hint="SSID"
+        	/>
+        	
+        <TextView
+        	style="@android:style/TextAppearance.Small"
+        	android:text="Hostname of FTP server"
+        	/>
+        <EditText
+        	android:id="@+id/server_hostname"
+        	style="@android:style/TextAppearance.Large"
+        	android.singleLine="true"
+        	android.layout_width="fill_parent"
+        	android:hint="hostname"
+        	/>
+        	
+        <TextView
+        	style="@android:style/TextAppearance.Small"
+        	android:text="Username"
+        	/>
+        <EditText
+        	android:id="@+id/server_username"
+        	style="@android:style/TextAppearance.Large"
+        	android.singleLine="true"
+        	android.layout_width="fill_parent"
+        	android:hint="hostname"
+        	/>
+        	
+        <TextView
+        	style="@android:style/TextAppearance.Small"
+        	android:text="Password"
+        	/>
+        <EditText
+        	android:id="@+id/server_password"
+        	style="@android:style/TextAppearance.Large"
+        	android:password="true"
+        	android:singleLine="true"
+        	android:layout_width="fill_parent"
+        	android:hint="password"
+        	/>
+</LinearLayout>

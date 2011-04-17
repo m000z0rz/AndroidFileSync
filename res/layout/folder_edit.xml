@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:padding="5dp">
+        
+        <TextView
+        	style="@android:style/TextAppearance.Small"
+        	android:text="Type"
+        	/>
+        <EditText
+        	android:id="@+id/folder_type"
+        	style="@android:style/TextAppearance.Large"
+        	android:singleLine="true"
+        	android:layout_width="fill_parent"
+        	android:layout_height="wrap_content"
+        	android:hint="(type)"
+        	/>
+        
+        <TextView
+        	style="@android:style/TextAppearance.Small"
+        	android:text="Local Path"
+        	/>
+        <EditText
+        	android:id="@+id/folder_local_path"
+        	style="@android:style/TextAppearance.Large"
+        	android.singleLine="true"
+        	android.layout_width="fill_parent"
+        	android:hint="Local Path"
+        	/>
+        	
+        <TextView
+        	style="@android:style/TextAppearance.Small"
+        	android:text="Remote Path"
+        	/>
+        <EditText
+        	android:id="@+id/folder_remote_path"
+        	style="@android:style/TextAppearance.Large"
+        	android.singleLine="true"
+        	android.layout_width="fill_parent"
+        	android:hint="Remote Path"
+        	/>
+        	
+</LinearLayout>
