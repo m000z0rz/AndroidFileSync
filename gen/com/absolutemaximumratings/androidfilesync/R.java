@@ -31,12 +31,13 @@ public final class R {
         public static final int folder_type=0x7f080000;
         public static final int item_subtitle=0x7f080004;
         public static final int item_title=0x7f080003;
-        public static final int menu_delete=0x7f08000a;
-        public static final int menu_edit=0x7f080009;
-        public static final int server_hostname=0x7f080006;
-        public static final int server_password=0x7f080008;
-        public static final int server_ssid=0x7f080005;
-        public static final int server_username=0x7f080007;
+        public static final int menu_delete=0x7f08000b;
+        public static final int menu_edit=0x7f08000a;
+        public static final int server_edit_layout=0x7f080005;
+        public static final int server_hostname=0x7f080007;
+        public static final int server_password=0x7f080009;
+        public static final int server_ssid=0x7f080006;
+        public static final int server_username=0x7f080008;
     }
     public static final class layout {
         public static final int folder_edit=0x7f030000;
