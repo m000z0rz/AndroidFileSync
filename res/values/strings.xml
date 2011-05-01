@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="hello">Hello World, AndroidFileSync!</string>
+	<string name="folder_type_prompt">Type</string>
+    <string-array name="folder_types">
+        <item>Push</item>
+        <item>Pull</item>
+        <item>Both</item>
+    </string-array>
     <string name="app_name">Android File Sync</string>
+    
 </resources>

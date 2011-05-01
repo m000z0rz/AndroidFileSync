@@ -6,51 +6,59 @@
         android:padding="5dp">
         <TextView
         	style="@android:style/TextAppearance.Small"
+        	android:layout_width="fill_parent"
+        	android:layout_height="wrap_content"
         	android:text="SSID"
         	/>
         <EditText
         	android:id="@+id/server_ssid"
-        	style="@android:style/TextAppearance.Large"
         	android:singleLine="true"
         	android:layout_width="fill_parent"
         	android:layout_height="wrap_content"
         	android:hint="SSID"
         	/>
         	
-        <TextView
+		<TextView
         	style="@android:style/TextAppearance.Small"
+        	android:layout_width="fill_parent"
+        	android:layout_height="wrap_content"
         	android:text="Hostname of FTP server"
         	/>
         <EditText
         	android:id="@+id/server_hostname"
-        	style="@android:style/TextAppearance.Large"
-        	android.singleLine="true"
-        	android.layout_width="fill_parent"
-        	android:hint="hostname"
+        	android:singleLine="true"
+        	android:layout_width="fill_parent"
+        	android:layout_height="wrap_content"
+        	android:hint="Hostname"
         	/>
-        	
+        
+        
         <TextView
         	style="@android:style/TextAppearance.Small"
+        	android:layout_width="fill_parent"
+        	android:layout_height="wrap_content"
         	android:text="Username"
         	/>
         <EditText
         	android:id="@+id/server_username"
-        	style="@android:style/TextAppearance.Large"
-        	android.singleLine="true"
-        	android.layout_width="fill_parent"
-        	android:hint="hostname"
+        	android:singleLine="true"
+        	android:layout_width="fill_parent"
+        	android:layout_height="wrap_content"
+        	android:hint="Username"
         	/>
-        	
+        
         <TextView
         	style="@android:style/TextAppearance.Small"
+        	android:layout_width="fill_parent"
+        	android:layout_height="wrap_content"
         	android:text="Password"
         	/>
         <EditText
         	android:id="@+id/server_password"
-        	style="@android:style/TextAppearance.Large"
         	android:password="true"
         	android:singleLine="true"
         	android:layout_width="fill_parent"
-        	android:hint="password"
+        	android:layout_height="wrap_content"
+        	android:hint="Password"
         	/>
 </LinearLayout>
