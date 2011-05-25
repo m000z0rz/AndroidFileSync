@@ -102,7 +102,7 @@ public class ServerEditActivity extends Activity {
 				else if (type==2) displayText += "(Pull)";
 				else if (type==3) displayText += "(Both)";
 				displayText += " " + foldersCursor.getString(foldersCursor.getColumnIndex("local_path"));
-				displayText += " / " + foldersCursor.getString(foldersCursor.getColumnIndex("remote_path"));
+				displayText += " : " + foldersCursor.getString(foldersCursor.getColumnIndex("remote_path"));
 				folderBox.setText(displayText);
 				mLayout.addView(folderBox);
 				

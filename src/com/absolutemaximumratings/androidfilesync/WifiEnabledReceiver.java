@@ -12,6 +12,16 @@ public class WifiEnabledReceiver extends BroadcastReceiver {
 
 	@Override
 	public void onReceive(Context context, Intent intent) {
+		NetworkInfo netInfo = (NetworkInfo)intent.getParcelableExtra(WifiManager.EXTRA_NETWORK_INFO);
+		
+		if(netInfo.getState().equals(NetworkInfo.State.CONNECTED)) {
+			//could also check wifi stuff?
+			Intent synchroIntent = new Intent(context, Synchronizer.class);
+			context.startService(synchroIntent);
+		}
+	}
+	
+	private void oldOnReceive(Context context, Intent intent) {
 		//Toast.makeText(context, "onReceive", Toast.LENGTH_SHORT).show();
 
 		//WifiManager wifi = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
@@ -22,11 +32,11 @@ public class WifiEnabledReceiver extends BroadcastReceiver {
 		
 		NetworkInfo info = (NetworkInfo)intent.getParcelableExtra(WifiManager.EXTRA_NETWORK_INFO);
 		Log.i("filesync", "state: " + info.getState());
-		  if (info.getState().equals(NetworkInfo.State.CONNECTED)) {
-		    Log.i("filesync", "connected");
-		  } else if (info.getState().equals(NetworkInfo.State.CONNECTING)) {
-			  Log.i("filesync", "connecting");
-		  }
+		if (info.getState().equals(NetworkInfo.State.CONNECTED)) {
+			Log.i("filesync", "connected");
+		} else if (info.getState().equals(NetworkInfo.State.CONNECTING)) {
+			Log.i("filesync", "connecting");
+		}
 		//Log.i("filesync", "tostring: " + wifi.toString());
 		//Log.i("filesync", "state: " + wifi.getWifiState());
 		//Log.i("filesync", "bssid: " + wifiInfo.getBSSID());

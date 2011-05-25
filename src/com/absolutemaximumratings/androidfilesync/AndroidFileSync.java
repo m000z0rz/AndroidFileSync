@@ -60,27 +60,7 @@ public class AndroidFileSync extends TabActivity {
         
         
         /*
-        
-        Context context = getApplicationContext();
-        
-        LinearLayout layout = new LinearLayout(context);
-        layout.setOrientation(LinearLayout.VERTICAL);
-        TextView headerText = new TextView(context);
-        headerText.append("hellos!\nmeow");
-        layout.addView(headerText);
-        
-        Button btSynchronize = new Button(context);
-        btSynchronize.setText("Begin Synchronize");
-        btSynchronize.setOnClickListener(btSynchronize_Click);
-        layout.addView(btSynchronize);
-        
-        setContentView(layout);
-        
-        
-        Context context = getApplicationContext();
-        TextView view = new TextView(context);
-        view.setText("hellos");
-        setContentView(view);
+
         
         boolean error;
         
@@ -156,54 +136,4 @@ public class AndroidFileSync extends TabActivity {
         */
     }
     
-    private OnClickListener btSynchronize_Click = new OnClickListener() {
-        public void onClick(View v) {
-        	Context context = getApplicationContext();
-            if (synchroBound) {
-            	Log.i("filesync", "activity calling synchro");
-            	
-            	Toast.makeText(context, "calling in synchronizer", Toast.LENGTH_SHORT).show();
-            	synchro.startSynchronize();
-            } else {
-            	Log.e("filesync", "not bound");
-            	Toast.makeText(context, "no synchronizer bound", Toast.LENGTH_SHORT).show();
-            }
-        }
-    };
-
-    
-    @Override
-    protected void onStart() {
-    	super.onStart();
-    	// Bind the synchronizer service   	
-    	
-    	Intent intent = new Intent(this, Synchronizer.class);
-    	Log.i("filesync", "filesync onstart");
-    	//bindService(intent, synchroConnection, Context.BIND_AUTO_CREATE);
-    }
-    
-    @Override
-    protected void onStop() {
-    	super.onStop();
-    	// Unbind the synchro service
-    	/*
-    	if (synchroBound) {
-    		unbindService(synchroConnection);
-    		synchroBound = false;
-    	}
-    	*/
-    }
-    
-    private ServiceConnection synchroConnection = new ServiceConnection() {
-    	
-    	public void onServiceConnected(ComponentName className, IBinder serviceBinder) {
-    		SynchroBinder synchroBinder = (SynchroBinder) serviceBinder;
-    		synchro = synchroBinder.getService();
-    		synchroBound = true;	
-		}
-
-		public void onServiceDisconnected(ComponentName name) {
-			synchroBound = false;
-		}
-    };
 }
